@@ -18,7 +18,6 @@
 				<h4 style="text-align: center; margin-top: 0px; margin-bottom: 0px;">Consulter mes réservations</h4>
 				</div>
 				<div data-role="fieldcontain" data-type="horizontal" data-mini="true" class="ui-hide-label">
-					<?php echo $digicode; ?>
 				</div>
 			</div>
 			<div data-role="footer" data-position="fixed" data-theme="<?php echo $themeFooter; ?>">

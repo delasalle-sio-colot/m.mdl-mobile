@@ -33,8 +33,5 @@ if ($nbReponses == 0) {
 	$msgFooter = 'Vous avez '.$nbReponses.' réservation(s) !';
 	$themeFooter = $themeNormal;
 	
-	//liste consultations
-	$digicode = $lesReservations->getDigicode();
-	
 	include_once ('vues/VueConsulterReservations.php');
 }
