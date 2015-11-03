@@ -14,7 +14,7 @@
 				<h4>M2L-GRR</h4>
 			</div>
 			<div data-role="content">
-				<h4 style="text-align: center; margin-top: 0px; margin-bottom: 0px;">M'identifier</h4>
+				<h4 style="text-align: center; margin-top: 0px; margin-bottom: 0px;">Consulter mes réservations</h4>
 				<form name="form1" id="form1" action="index.php?action=Connecter" method="post">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<label for="nom">Utilisateur :</label>
