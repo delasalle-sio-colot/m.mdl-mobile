@@ -37,8 +37,8 @@ else {
 		include_once ('vues/VueConnecter.php');
 	}
 	else {
-		// connexion du serveur web à la base MySQL
 		include_once ('modele/DAO.class.php');
+		// connexion du serveur web à la base MySQL
 		$dao = new DAO();
 		
 		// test de l'authentification de l'utilisateur
