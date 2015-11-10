@@ -25,7 +25,7 @@
 			</div>
 			
 			<div data-role="footer" data-position="fixed" data-theme="<?php echo $themeFooter; ?>">
-				
+				<h4><?php echo $msgFooter; ?></h4>
 			</div>
 		</div>
 	</body>
