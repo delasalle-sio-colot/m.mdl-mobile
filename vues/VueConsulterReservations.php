@@ -12,6 +12,7 @@
 		<div data-role="page">
 			<div data-role="header" data-theme="<?php echo $themeNormal; ?>">
 				<h4>M2L-GRR</h4>
+				<a href="index.php?action=Menu">Retour menu</a>
 			</div>
 			<div data-role="content">
 				<div data-role="fieldcontain" class="ui-hide-label">
