@@ -32,6 +32,6 @@ if ($nbReponses == 0) {
 	// footer
 	$msgFooter = 'Vous avez '.$nbReponses.' réservation(s) !';
 	$themeFooter = $themeNormal;
-	
 	include_once ('vues/VueConsulterReservations.php');
 }
+unset($dao);
