@@ -22,12 +22,12 @@
 						echo 'Vous n\'avez pas de réservations';
 					} else {
 						foreach ($lesReservations as $uneReservation) {
-							echo '<div data-role="fieldcontain" data-type="horizontal" data-mini="true" class="ui-hide-label">';
-							echo '<h4>Réserv. n° '.$uneReservation->getId().'<br>';
-							echo 'Réserv. n° '.$uneReservation->getDigicode().'</h4><br>';
-							echo 'Passée le '.Outils::convertirEnDateFR($uneReservation->getTimestamp()).'<br>';
-							echo 'Début : '.$uneReservation->getStart_time().'<br>';
-							echo 'Fin : '.$uneReservation->getEnd_time().'<br>';
+							echo '<div data-role="fieldcontain" class="ui-hide-label">';
+							echo '<h4>Réserv. n° '.$uneReservation->getId();
+							echo '<div style="text-align: right;">Digicode '.$uneReservation->getDigicode().'</h4><br>';
+							echo 'Passée le '.date('d/m/Y', strtotime($uneReservation->getTimestamp())).'<br>';
+							echo 'Début : '.date('d/m/Y H:i:s', $uneReservation->getStart_time()).'<br>';
+							echo 'Fin : '.date('d/m/Y H:i:s', $uneReservation->getEnd_time()).'<br>';
 							echo 'Salle : '.$uneReservation->getRoom_name().'<br>';
 							echo ($uneReservation->getStatus() == 0) ? 'Etat : Confirmée' : 'Etat : Provisoire';
 							echo '</div>';
