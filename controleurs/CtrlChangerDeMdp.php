@@ -19,27 +19,21 @@ $dao = new DAO();
 
 // mise à jour de la table mrbs_entry_digicode (si besoin) pour créer les digicodes manquants
 $dao->creerLesDigicodesManquants();
-$annulerReservation = $_POST ["annulerReservation"];
+$newmdp1 = $_POST ["newmdp1"];
+$newmdp2 = $_POST ["newmdp2"];
 
-$annulationReservation = $dao->existeReservation($annulerReservation);
-$createurReservation = $dao->estLeCreateur($_SESSION['nom'] ,$annulerReservation);
-
-if (empty($annulerReservation)) {
+if (empty($newmdp1) || empty($newmdp2)) {
 	$msgFooter = 'Données incomplètes ou incorrectes !';
 	$themeFooter = $themeProbleme;
-	include_once ('vues/VueAnnulerReservation.php');
-} elseif($annulationReservation == false) {
-	$msgFooter = 'Numéro de réservation inexistant !';
+	include_once ('vues/VueChangerDeMdp.php');
+} elseif($newmdp1 != $newmdp2) {
+	$msgFooter = 'Le nouveau mot de passe et<br>sa confirmation sont différents !';
 	$themeFooter = $themeProbleme;
-	include_once ('vues/VueAnnulerReservation.php');
-} elseif($createurReservation == false) {
-	$msgFooter = 'Vous n\'êtes pas l\'auteur de cette réservation !';
-	$themeFooter = $themeProbleme;
-	include_once ('vues/VueAnnulerReservation.php');
+	include_once ('vues/VueChangerDeMdp.php');
 } else {
-	$dao->annulerReservation($annulerReservation);
+	$dao->modifierMdpUser($_SESSION['nom'], $newmdp1);
 	$msgFooter = 'Enregistrement effectué.<br>Vous allez recevoir un mail de confirmation.';
 	$themeFooter = $themeNormal;
-	include_once ('vues/VueAnnulerReservation.php');
+	include_once ('vues/VueChangerDeMdp.php');
 }
 unset($dao);
