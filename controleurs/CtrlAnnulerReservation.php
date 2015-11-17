@@ -19,7 +19,9 @@ $dao = new DAO();
 
 // mise à jour de la table mrbs_entry_digicode (si besoin) pour créer les digicodes manquants
 $dao->creerLesDigicodesManquants();
-$annulerReservation = $_POST ["annulerReservation"];
+
+// récupération des données postées
+if ( empty ($_POST ["annulerReservation"]) == true)  $annulerReservation = "";  else   $annulerReservation = $_POST ["annulerReservation"];
 
 $annulationReservation = $dao->existeReservation($annulerReservation);
 $createurReservation = $dao->estLeCreateur($_SESSION['nom'] ,$annulerReservation);

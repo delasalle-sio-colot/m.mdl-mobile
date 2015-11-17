@@ -21,28 +21,23 @@ $dao = new DAO();
 $dao->creerLesDigicodesManquants();
 
 // récupération des données postées
-if ( empty ($_POST ["num_reserv"]) == true)  $num_reserv = "";  else   $num_reserv = $_POST ["num_reserv"];
+if ( empty ($_POST ["nom"]) == true)  $nom = "";  else   $nom = $_POST ["nom"];
+if ( empty ($_POST ["mail"]) == true)  $mail = "";  else   $mail = $_POST ["mail"];
+if ( empty ($_POST ["niveau"]) == true)  $niveau = "off";  else   $niveau = $_POST ["niveau"];
 
-// Confirmation de la réservation
-$confirmationReservation = $dao->existeReservation($num_reserv);
-$createurReservation = $dao->estLeCreateur($_SESSION['nom'] ,$num_reserv);
-
-if (empty($num_reserv)) {
+if (empty($nom) || empty($mail) || empty($niveau) || ! Outils::estUneAdrMailValide($mail)) {
 	$msgFooter = 'Données incomplètes ou incorrectes !';
 	$themeFooter = $themeProbleme;
-	include_once ('vues/VueConfirmerReservation.php');
-} elseif($confirmationReservation == false) {
-	$msgFooter = 'Numéro de réservation inexistant !';
+	include_once ('vues/VueCreerUtilisateur.php');
+} elseif($dao->existeUtilisateur($nom)) {
+	$msgFooter = 'Nom d\'utilisateur déjà existant !';
 	$themeFooter = $themeProbleme;
-	include_once ('vues/VueConfirmerReservation.php');
-} elseif($createurReservation == false) {
-	$msgFooter = 'Vous n\'êtes pas l\'auteur de cette réservation !';
-	$themeFooter = $themeProbleme;
-	include_once ('vues/VueConfirmerReservation.php');
+	include_once ('vues/VueCreerUtilisateur.php');
 } else {
-	$dao->confirmerReservation($num_reserv);
-	$msgFooter = 'Enregistrement effectué.<br>Vous allez recevoir un mail de confirmation.';
+	$mdp = Outils::creerMdp();
+	$dao->enregistrerUtilisateur($nom, $niveau, $mdp, $mail);
+	$msgFooter = 'Enregistrement effectué.<br>Un mail va être envoyé à l\'utilisateur !';
 	$themeFooter = $themeNormal;
-	include_once ('vues/VueConfirmerReservation.php');	
+	include_once ('vues/VueCreerUtilisateur.php');
 }
 unset($dao);

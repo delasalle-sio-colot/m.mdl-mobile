@@ -19,8 +19,10 @@ $dao = new DAO();
 
 // mise à jour de la table mrbs_entry_digicode (si besoin) pour créer les digicodes manquants
 $dao->creerLesDigicodesManquants();
-$newmdp1 = $_POST ["newmdp1"];
-$newmdp2 = $_POST ["newmdp2"];
+
+// récupération des données postées
+if ( empty ($_POST ["newmdp1"]) == true)  $newmdp1 = "";  else   $newmdp1 = $_POST ["newmdp1"];
+if ( empty ($_POST ["newmdp2"]) == true)  $newmdp2 = "";  else   $newmdp2 = $_POST ["newmdp2"];
 
 if (empty($newmdp1) || empty($newmdp2)) {
 	$msgFooter = 'Données incomplètes ou incorrectes !';
@@ -32,6 +34,7 @@ if (empty($newmdp1) || empty($newmdp2)) {
 	include_once ('vues/VueChangerDeMdp.php');
 } else {
 	$dao->modifierMdpUser($_SESSION['nom'], $newmdp1);
+	$dao->envoyerMdp($_SESSION['nom'], $newmdp1);
 	$msgFooter = 'Enregistrement effectué.<br>Vous allez recevoir un mail de confirmation.';
 	$themeFooter = $themeNormal;
 	include_once ('vues/VueChangerDeMdp.php');
